@@ -42,7 +42,7 @@ const items: MenuProps["items"] = [
     getItem("Cài đặt", "setting", <SettingOutlined />, [getItem("Hồ sơ", "profile"), getItem("Ứng dụng", "app")]),
 ];
 
-const itemRender = (route: Route, routes: Route[]): React.ReactNode => {
+const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
     const last = routes.indexOf(route) === routes.length - 1;
     return last ? <span>{route.breadcrumbName}</span> : <Link href={"/"}>{route.breadcrumbName}</Link>;
 };
