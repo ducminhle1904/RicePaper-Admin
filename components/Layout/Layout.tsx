@@ -11,13 +11,13 @@ type MenuItem = Required<MenuProps>["items"][number];
 const { Sider, Content } = Layout;
 const { Text } = Typography;
 
-interface Router extends NextRouter {
+interface Route extends NextRouter {
     path: string;
     breadcrumbName: string;
 }
 
 interface Props extends WithRouterProps {
-    router: Router;
+    router: Route;
 }
 
 function getItem(
@@ -42,10 +42,10 @@ const items: MenuProps["items"] = [
     getItem("Cài đặt", "setting", <SettingOutlined />, [getItem("Hồ sơ", "profile"), getItem("Ứng dụng", "app")]),
 ];
 
-function itemRender(route: Router, params: any, routes: Array<Router>, paths: Array<string>): React.ReactNode {
+const itemRender = (route: Route, routes: Route[]): React.ReactNode => {
     const last = routes.indexOf(route) === routes.length - 1;
     return last ? <span>{route.breadcrumbName}</span> : <Link href={"/"}>{route.breadcrumbName}</Link>;
-}
+};
 
 function transfromRoute(route: string) {
     switch (route) {

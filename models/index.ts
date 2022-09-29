@@ -5,3 +5,11 @@ export interface RowData {
     sold: string;
     price: string;
 }
+
+export type authContextType = {
+    user: boolean | null;
+    loading: boolean;
+    isAuthenticated: boolean;
+    login: (username: string, password: string) => void;
+    logout: () => void;
+};
