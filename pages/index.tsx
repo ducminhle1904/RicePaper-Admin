@@ -10,12 +10,4 @@ const Index = () => {
     return <></>;
 };
 
-Index.getInitialProps = async ({ ctx }: any) => {
-    if (ctx && ctx.req) {
-        ctx.res.statusCode = 302;
-        ctx.res.setHeader("Location", redirectTo);
-    }
-    return { props: "" };
-};
-
 export default Index;

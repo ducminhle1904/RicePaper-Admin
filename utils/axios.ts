@@ -3,8 +3,8 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } f
 import Cookies from "js-cookie";
 
 let urls = {
-    test: `http://localhost:8080`,
-    development: "http://localhost:8080/",
+    test: "https://ken-inventory-api.fly.dev",
+    development: "https://ken-inventory-api.fly.dev",
     production: "https://ken-inventory-api.fly.dev",
 };
 
