@@ -1,9 +1,10 @@
 export interface RowData {
     id: string;
-    name: string;
-    stock: string;
+    productName: string;
+    quantity: string;
     sold: string;
     price: string;
+    productSku: string;
 }
 
 export type authContextType = {

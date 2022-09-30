@@ -1,11 +1,10 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from "react";
+import { message } from "antd";
 import Cookies from "js-cookie";
 import Router from "next/router";
 
-//api here is an axios instance which has the baseURL set according to the env.
 import request from "../utils/axios";
 import { authContextType } from "../models";
-import LoginPage from "../pages/login";
 
 type Props = {
     children: ReactNode;
@@ -42,13 +41,16 @@ export const AuthProvider = ({ children }: Props) => {
 
     const login = async (username: string, password: string) => {
         const { data: res } = await request.post("/login", { username, password });
-        const token = res.response.accessToken;
+        const token = res?.response?.accessToken;
         if (token) {
             Cookies.set("token", token, { expires: 60 });
             request.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             const { data: dataUser } = await request.get("/user_info");
             setUser(dataUser.response);
             Router.push("/dashboard");
+            message.success("Đăng nhập thành công");
+        } else {
+            message.error("Sai tên tài khoản hoặc mật khẩu");
         }
     };
 
@@ -57,11 +59,12 @@ export const AuthProvider = ({ children }: Props) => {
         setUser(null);
         delete request.defaults.headers.common["Authorization"];
         Router.push("/login");
+        message.success("Đăng xuất thành công");
     };
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, user, login, loading, logout }}>
-            {user ? children : <LoginPage />}
+            {children}
         </AuthContext.Provider>
     );
 };

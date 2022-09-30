@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Button, Checkbox, Form, Input, Typography, Avatar } from "antd";
-import { useAuth } from "../contexts/auth";
-import { useRouter } from "next/router";
+import { Avatar, Form, Input, Typography } from "antd";
 import Head from "next/head";
+import { useAuth } from "../contexts/auth";
 
 const { Title } = Typography;
 
 export default function LoginPage() {
-    const [sidebar, setsidebar] = useState();
-    const { login, user } = useAuth();
-    const router = useRouter();
-
-    useEffect(() => {
-        router.replace("/login");
-    }, []);
+    const { login } = useAuth();
 
     const onFinish = (values: any) => {
         login(values.username, values.password);
@@ -28,10 +20,10 @@ export default function LoginPage() {
                 <title>Đăng nhập</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className="h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4">
+            <div className="h-full w-full py-16 px-4">
                 <div className="flex flex-col items-center justify-center">
                     <Avatar src="/Ricepaperlogo.png" size={120} />
-                    <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-5 mt-16">
+                    <div className="bg-white shadow-2xl rounded lg:w-1/3  md:w-1/2 w-full p-5 mt-16">
                         <Title level={2} className="text-gray-800">
                             Login to your account
                         </Title>

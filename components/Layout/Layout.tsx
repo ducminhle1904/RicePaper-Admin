@@ -1,11 +1,13 @@
-import { Breadcrumb, Layout, Menu, Avatar, Typography } from "antd";
+import type { MenuProps } from "antd";
+import { Avatar, Breadcrumb, Layout, Menu, Typography } from "antd";
 import { WithRouterProps } from "next/dist/client/with-router";
 import Link from "next/link";
 import { NextRouter, withRouter } from "next/router";
 import React, { useState } from "react";
-import type { MenuProps } from "antd";
 
 import { AppstoreOutlined, ProfileOutlined, SettingOutlined } from "@ant-design/icons";
+import { IconLogout } from "@tabler/icons";
+import { useAuth } from "../../contexts/auth";
 
 type MenuItem = Required<MenuProps>["items"][number];
 const { Sider, Content } = Layout;
@@ -40,6 +42,7 @@ const items: MenuProps["items"] = [
     getItem("Tổng quan", "dashboard", <AppstoreOutlined />),
     getItem("Danh sách hàng hóa", "product-list", <ProfileOutlined />),
     getItem("Cài đặt", "setting", <SettingOutlined />, [getItem("Hồ sơ", "profile"), getItem("Ứng dụng", "app")]),
+    getItem("Đăng xuất", "logout", <IconLogout />),
 ];
 
 const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
@@ -87,6 +90,7 @@ const AppLayout = (props: React.PropsWithChildren<Props>) => {
         setIsCollapsed(isCollapsed);
     };
 
+    const { logout } = useAuth();
     const pathname = props.router.pathname;
     const pathsplit: string[] = pathname.split("/");
     const routes = routesMaker(pathsplit);
@@ -95,6 +99,8 @@ const AppLayout = (props: React.PropsWithChildren<Props>) => {
         domEvent.preventDefault();
         if (keyPath.length > 1) {
             props.router.push(`/setting/${key}`);
+        } else if (key === "logout") {
+            logout();
         } else {
             props.router.push(`/${key}`);
         }

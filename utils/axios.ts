@@ -1,16 +1,20 @@
 import { message } from "antd";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 
 let urls = {
     test: `http://localhost:8080`,
     development: "http://localhost:8080/",
-    production: "https://your-production-url.com/",
+    production: "https://ken-inventory-api.fly.dev",
 };
+
+const token = Cookies.get("token");
 
 const request: AxiosInstance = axios.create({
     baseURL: urls[process.env.NODE_ENV],
     headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
     },
 });
