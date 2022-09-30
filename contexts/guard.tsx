@@ -8,15 +8,10 @@ const ProtectRoute = ({ children }: any) => {
         if (!isAuthenticated && window.location.pathname !== "/login") {
             router.push("/login");
         }
+        if (isAuthenticated && window.location.pathname === "/login") {
+            router.push("/dashboard");
+        }
     }
-    // if (!isAuthenticated && Router.pathname !== "/login") {
-    //     console.log(2);
-    //     Router.push("/login");
-    // }
-    // if (isAuthenticated && Router.pathname === "/login") {
-    //     console.log(3);
-    //     Router.push("/dashboard");
-    // }
 
     return children;
 };
