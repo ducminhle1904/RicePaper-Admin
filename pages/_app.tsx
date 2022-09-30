@@ -34,21 +34,19 @@ export default function MyApp({ Component, pageProps, ...appProps }: AppProps) {
     });
     return (
         <AuthProvider>
-            <ProtectRoute>
-                <PageLayout>
-                    <Head>
-                        <title>Quản lý kho hàng</title>
-                        <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    </Head>
-                    {loading ? (
-                        <div className="absolute left-1/2 top-1/2 flex items-center justify-center">
-                            <Spin />
-                        </div>
-                    ) : (
-                        <Component {...pageProps} />
-                    )}
-                </PageLayout>
-            </ProtectRoute>
+            <PageLayout>
+                <Head>
+                    <title>Quản lý kho hàng</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                </Head>
+                {loading ? (
+                    <div className="absolute left-1/2 top-1/2 flex items-center justify-center">
+                        <Spin />
+                    </div>
+                ) : (
+                    <Component {...pageProps} />
+                )}
+            </PageLayout>
         </AuthProvider>
     );
 }

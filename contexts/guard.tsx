@@ -1,7 +1,7 @@
 import { useAuth } from "./auth";
 import Router from "next/router";
 
-const ProtectRoute = ({ children }) => {
+const ProtectRoute = ({ children }: any) => {
     const { isAuthenticated } = useAuth();
     if (typeof window !== undefined) {
         if (!isAuthenticated && Router.pathname !== "/login") {
